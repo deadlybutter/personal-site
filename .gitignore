@@ -38,3 +38,6 @@ jspm_packages
 
 # Public Files
 public/release
+
+# Config
+.env
