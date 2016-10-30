@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css?family=Crimson+Text|Montserrat');
+
+$vertical-spacing: 5vh;
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
+  font-family: 'Crimson Text', serif;
+  background-color: #FCF0D4;
+}
+
+a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+h1 {
+  font-weight: bolder;
+  font-family: 'Montserrat', sans-serif;
+}
+
+h2 {
+  font-weight: bold;
+  font-family: 'Montserrat', sans-serif;
+
+  &:after {
+    content: "";
+    display: block;
+    margin: .1em 25%;
+    border-bottom: .15em solid;
+    border-image: linear-gradient(90deg, #1b1b1c, #404142) 10;
+  }
+}
+
+h3 {
+  font-weight: 100;
+}
+
+.container {
+  width: 100%;
+  max-width: 760px;
+  display: block;
+  margin: auto;
+  font-size: 2.5vw;
+
+  @media (min-width: 1060px) {
+    font-size: 1.5vw;
+  }
+
+  @media (min-width: 2560px) {
+    max-width: 1520px;
+  }
+}
+
+header {
+  text-align: center;
+  padding-bottom: $vertical-spacing;
+
+  a {
+    text-decoration: none;
+  }
+
+  h1 {
+    margin-bottom: 0;
+  }
+
+  h3 {
+    margin-top: 0;
+  }
+
+}
+
+article {
+  > * {
+    margin: $vertical-spacing 0;
+  }
+
+  h1, h2, h3 {
+    text-align: center;
+  }
+
+  h1 {
+    font-size: 4em;
+  }
+
+  h2 {
+    font-size: 2em;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .column {
+    font-size: 1.5em;
+    padding: 16px;
+
+    @media (min-width: 760px) {
+      column-count: 2;
+      font-size: 1em;
+    }
+  }
+}
