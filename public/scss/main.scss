@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Crimson+Text|Montserrat');
 
+$background-color: #ffde92;
+$foreground-color: #111111;
+
 $vertical-spacing: 5vh;
+$icon-size: 1.5em;
 
 html, body {
   width: 100%;
@@ -9,7 +13,8 @@ html, body {
   padding: 0px;
   overflow-x: hidden;
   font-family: 'Crimson Text', serif;
-  background-color: #FCF0D4;
+  background-color: $background-color;
+  color: $foreground-color;
 }
 
 a {
@@ -44,7 +49,7 @@ h3 {
   max-width: 40em;
   display: block;
   margin: auto;
-  font-size: 2.5vw;
+  font-size: 4vw;
 
   @media (min-width: 1060px) {
     font-size: 1.5vw;
@@ -69,6 +74,21 @@ header {
 
   h3 {
     margin-top: 0;
+    margin-bottom: $icon-size / 4;
+  }
+
+  .header__icon {
+    display: inline-block;
+    width: $icon-size;
+    height: $icon-size;
+    margin: 0 $icon-size / 4;
+    border-radius: $icon-size;
+    background-size: cover;
+    background-position: center center;
+
+    &:hover {
+      box-shadow: inset 0px 0px 13px -2px rgba(0,0,0,0.75);
+    }
   }
 
 }

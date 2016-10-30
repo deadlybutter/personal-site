@@ -3,6 +3,7 @@ const app = express();
 
 const path = require('path');
 app.use(express.static(path.join(__dirname, 'public/release')));
+app.use(express.static(path.join(__dirname, 'public/img')));
 
 const router = express.Router();
 app.use('/', router);
