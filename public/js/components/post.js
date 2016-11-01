@@ -1,6 +1,8 @@
 class Post extends React.Component {
   constructor(props) {
     super(props);
+
+    this.renderElements = this.renderElements.bind(this);
   }
 
   mapElementToMarkup(element, index) {
@@ -12,11 +14,19 @@ class Post extends React.Component {
     }
   }
 
+  renderElements() {
+    if (!this.props.content.elements) {
+      return null;
+    }
+
+    return this.props.content.elements.map(this.mapElementToMarkup);
+  }
+
   render() {
     return (
       <article className="container">
         <h1>{this.props.content.title}</h1>
-        {this.props.content.elements.map(this.mapElementToMarkup)}
+        {this.renderElements()}
       </article>
     );
   }

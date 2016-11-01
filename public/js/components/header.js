@@ -4,21 +4,8 @@ class Header extends React.Component {
 
     this.icons = [
       {
-        'uri': '1',
-        'link': 'https://www.instagram.com/p/7qvcE3yS6V/?taken-by=itsjoekent'
-      },
-      {
         'uri': 'twitter',
         'link': 'https://twitter.com/itsjoekent'
-      },
-      {
-        'uri': 'profile',
-        'link': '/about'
-      },
-      {
-        'uri': 'mail',
-        'target': '',
-        'link': 'mailto:hey@joekent.me?Subject=Wanted%20to%20give%20you%20a%20million%20dollars!'
       }
     ];
   }
