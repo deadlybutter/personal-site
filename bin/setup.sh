@@ -1,4 +1,5 @@
 mkdir public/release
+cp node_modules/whatwg-fetch/fetch.js public/release
 npm run build
 if [[ -z "${PRODUCTION_ASSETS}" ]];
 then
