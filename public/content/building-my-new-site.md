@@ -32,6 +32,36 @@ This process turns the Markdown into JSON containing a series of elements each w
 
 To build the latest block, I call the API asking for the most recent posts, which returns an array containing there paths. For each of those paths, I get the markdown & reuse the markdown parsing function I talked about earlier. The post titles are added to the page as each individual ajax request & related processing finishes. This unfortunately means posts are not always in order, but it makes the code really simple & safe in terms of handling failure.
 
+## Performance
+
+OK OK I know you're all wondering at this point if this thing is as fast as advertised. For reference, this app is currently running on a Heroku Hobby dyno, which costs a grand total of $7 per month.
+
+I first tried a simple test with ApacheBench, which had some pretty good results!
+
+~i load_test_1.png
+
+Unfortunately my mac can't handle any attempt to scale AB up to thousands of clients & hundreds of thousands of requests.
+
+So I did some searching and I found a site called loader.io. It let me run a test with 10,000 clients, making sustained requests for 1 minute, for free! Lets look at the results,
+
+~i load_test_2.png
+
+So over the course of 1 minute, over 660K requests were made. Unfortunately it claims 20K of them timed out, but the average response time remained under 1 second. For a $7 dollar web server that is insane.
+
+Now I should point out, technically two requests need to happen in order for a browser to load the page (Asking the api endpoint for content). Unfortunately LoaderIO doesn't seem to offer a free way of running two requests at once, so I just did the API one by itself, same settings.
+
+~i load_test_3.png
+
+I also ran the other endpoint for latest posts, just to see if it was wildly different.
+
+~i load_test_4.png
+
+Overall, I'm very impressed that a $7 web server, using a single process, CPU core & NodeJS was able to handle this load testing & remain under 1000ms average response time. (Notice all of the things I just pointed out one could do to make this even better). Obviously this isn't 100% scientific either, but it gets the point across.
+
+Finally, I wanted to know how the site performs under low bandwidth. I used "GPRS" throttling in Google Chrome (Below 2G) and loaded this blog post, surprisingly the entire page was readable in 6 seconds. Worth noting, both hitting the API & downloading the markdown took less than 2 seconds. Most of the render time was related to downloading other bulky assets such as React & images in the post.
+
+To get an understanding if this was good or bad, I decided to keep the throttling on & tried some other websites. Google, 12 seconds. Seth Godin's blog, 8 seconds. Coding Horror, 6 seconds. CNN, don't even ask how many minutes.
+
 ## Limitations
 
 There are some limitations to the approach I've implemented here in its current form. The server currently loads a json file containing all of the routes (URL --> .md) which is how the API knows what files to return. Additionally, the server sorts this file on startup based on date for the latest posts. This creates two problems. First, any new blog posts or route changes requires a server restart. Thats always icky. Second, this server would have issues scaling either under high load or significant amount of blog posts. Thankfully this could be alleviated fairly easily by sticking content in a database & putting a service with an API in front of it.
