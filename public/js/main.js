@@ -1,6 +1,5 @@
 function renderContent(content) {
-  console.log(content);
-  document.title = content.title;
+  document.title = content.title || 'Joe Kent';
 
   const page = <Post content={content} />;
   const body = (
@@ -21,7 +20,8 @@ function renderContent(content) {
 function parseLine(line) {
   const element = {
     type: 'text',
-    content: ''
+    content: '',
+    block: false
   };
 
   // For each char in the string, check if its a new symbol.
@@ -30,7 +30,20 @@ function parseLine(line) {
     const char = line[index];
     const nextChar = line[index + 1];
 
-    if (char === '#') {
+    if (char === '#' && nextChar === '#') {
+      element.type = 'header-secondary';
+      index++;
+    }
+    else if (char === '~' && nextChar === 'l') {
+      element.type = 'latest';
+      element.block = true;
+      return element;
+    }
+    else if (char === '~' && nextChar === 'i') {
+      element.type = 'image';
+      index++;
+    }
+    else if (char === '#') {
       element.type = 'title';
     }
     else {
@@ -57,9 +70,9 @@ function transformMarkdown(markdown) {
     const element = parseLine(line);
 
     if (element.type === 'title') {
-      content.title = element.text;
+      content.title = element.content;
     }
-    else if (element.content !== '') {
+    else if (element.content !== '' || element.block) {
       content.elements.push(element);
     }
   });

@@ -1,4 +1,12 @@
 {
-  "_404": "404.md",
-  "/": "homepage.md"
+  "_404": {
+    "path": "404.md"
+  },
+  "/": {
+    "path": "homepage.md"
+  },
+  "/building-my-new-site": {
+    "path": "building-my-new-site.md",
+    "created": "2016-11-27T21:07:52.385Z"
+  }
 }

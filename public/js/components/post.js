@@ -7,9 +7,11 @@ class Post extends React.Component {
 
   mapElementToMarkup(element, index) {
     switch (element.type) {
+      case 'title': return <h1 key={index}>{element.content}</h1>
       case 'text': return <div className="column" key={index}>{element.content}</div>
       case 'header-secondary': return <h2 key={index}>{element.content}</h2>
-      case 'image': return <img src={element.content} key={index}></img>
+      case 'image': return <img src={`/embed/${element.content.trim()}`} key={index}></img>
+      case 'latest': return <Latest key={index} />
       default: return null;
     }
   }

@@ -30,14 +30,6 @@ h1 {
 h2 {
   font-weight: bold;
   font-family: 'Montserrat', sans-serif;
-
-  &:after {
-    content: "";
-    display: block;
-    margin: .1em 25%;
-    border-bottom: .15em solid;
-    border-image: linear-gradient(90deg, #1b1b1c, #404142) 10;
-  }
 }
 
 h3 {
@@ -50,6 +42,7 @@ h3 {
   display: block;
   margin: auto;
   font-size: 4vw;
+  text-align: center;
 
   @media (min-width: 1060px) {
     font-size: 1.5vw;
@@ -98,16 +91,21 @@ article {
     margin: $vertical-spacing 0;
   }
 
-  h1, h2, h3 {
-    text-align: center;
-  }
-
   h1 {
     font-size: 4em;
   }
 
   h2 {
     font-size: 2em;
+    display: inline-block;
+
+    &:after {
+      content: "";
+      display: block;
+      margin: .1em 15%;
+      border-bottom: .15em solid;
+      border-image: linear-gradient(90deg, #1b1b1c, #404142) 10;
+    }
   }
 
   img {
@@ -117,10 +115,44 @@ article {
   .column {
     font-size: 1.5em;
     padding: 16px;
+    text-align: left;
 
     @media (min-width: 760px) {
-      column-count: 2;
       font-size: 1em;
+    }
+  }
+
+  .latest {
+    $pointerWidth: 2em;
+    $pointerHeight: 1em;
+
+    text-align: left;
+
+    &:before {
+      content: 'Latest posts';
+      margin-left: 16px;
+    }
+
+    a {
+      text-decoration: none;
+      position: relative;
+      padding-left: $pointerWidth;
+      display: block;
+
+      &:hover {
+        &:before {
+          content: '';
+          background: url(pointer.png);
+          position: absolute;
+          display: block;
+          top: $pointerHeight;
+          left: 0em;
+          top: $pointerHeight / 2;
+          width: $pointerWidth;
+          height: $pointerHeight;
+          background-size: $pointerWidth $pointerHeight;
+        }
+      }
     }
   }
 }
